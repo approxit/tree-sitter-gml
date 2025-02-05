@@ -1,0 +1,241 @@
+=========================
+Single model without body
+=========================
+
+Some Base Model: Some Model
+
+---
+
+(source_file
+	(model_definition
+		base: (text)
+		name: (text)
+	)
+)
+
+==============================================
+Single model without body and with whitespaces
+==============================================
+
+
+
+
+Some Base Model     :      Some Model
+
+
+
+---
+
+(source_file
+	(model_definition
+		base: (text)
+		name: (text)
+	)
+)
+
+============================
+Multiple models without body
+============================
+
+Base1: Model1
+Base2: Model2
+Base3: Model3
+
+---
+
+(source_file
+	(model_definition
+		base: (text)
+		name: (text)
+	)
+	(model_definition
+		base: (text)
+		name: (text)
+	)
+	(model_definition
+		base: (text)
+		name: (text)
+	)
+)
+
+=========================================
+Models must start immediately on new line
+:error
+:skip
+=========================================
+
+	Base1: Model1
+
+---
+
+=================================================
+Multiple models without body and with whitespaces
+=================================================
+
+Base1  : Model1
+
+
+
+Base2 :Model2
+
+
+
+
+Base3:Model3
+
+
+
+
+
+---
+
+(source_file
+	(model_definition
+		base: (text)
+		name: (text)
+	)
+	(model_definition
+		base: (text)
+		name: (text)
+	)
+	(model_definition
+		base: (text)
+		name: (text)
+	)
+)
+
+==============================
+Model with not nested children
+==============================
+
+Base1: Model1
+	section1
+	section2
+
+---
+
+(source_file
+	(model_definition
+		base: (text)
+		name: (text)
+		body: (body
+			(section_definition
+				name: (text)
+			)
+			(section_definition
+				name: (text)
+			)
+		)
+	)
+)
+
+=================================
+Model with single nested children
+=================================
+
+Base2: Model2
+	section1
+		section2
+	section3
+
+---
+
+(source_file
+	(model_definition
+		base: (text)
+		name: (text)
+		body: (body
+			(section_definition
+				name: (text)
+				body: (body
+					(section_definition
+						name: (text)
+					)
+				)
+			)
+			(section_definition
+				name: (text)
+			)
+		)
+	)
+)
+
+===============================
+Model with deep nested children
+===============================
+
+Base2: Model2
+	section1
+		section2
+			section3
+		section4
+	section5
+
+---
+
+(source_file
+	(model_definition
+		base: (text)
+		name: (text)
+		body: (body
+			(section_definition
+				name: (text)
+				body: (body
+					(section_definition
+						name: (text)
+						body: (body
+							(section_definition
+								name: (text)
+							)
+						)
+					)
+					(section_definition
+						name: (text)
+					)
+				)
+			)
+			(section_definition
+				name: (text)
+			)
+		)
+	)
+)
+
+========================================
+Model with trailing deep nested children
+========================================
+
+Base3: Model3
+	section1
+		section2
+			section3
+				section4
+
+---
+
+(source_file
+	(model_definition
+		base: (text)
+		name: (text)
+		body: (body
+			(section_definition
+				name: (text)
+				body: (body
+					(section_definition
+						name: (text)
+						body: (body
+							(section_definition
+								name: (text)
+								body: (body
+									(section_definition
+										name: (text)
+									)
+								)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+)

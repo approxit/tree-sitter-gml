@@ -1,0 +1,34 @@
+{
+  "grammars": [
+    {
+      "name": "gml",
+      "camelcase": "GML",
+      "scope": "source.gml",
+      "file-types": [
+        ".gml"
+      ],
+      "injection-regex": "^gml$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Grammar parser for Game Modeling Language (GML)",
+    "authors": [
+      {
+        "name": "Approxit"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/tree-sitter/tree-sitter-gml"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}

@@ -1,0 +1,49 @@
+==================================
+Struct not at model_defition level
+==================================
+
+Base1: Model1
+	field: value
+
+---
+
+(source_file
+	(model_definition
+		base: (text)
+		name: (text)
+		body: (body
+			(section_definition
+				name: (text)
+			)
+		)
+	)
+)
+
+=============
+Simple struct
+=============
+
+Base1: Model1
+	section1
+		field1: value1
+		field2: value2
+		field3: value3
+
+---
+
+(source_file
+	(model_definition
+		base: (text)
+		name: (text)
+		body: (body
+			(section_definition
+				name: (text)
+				body: (body
+					(struct_definition
+						name: (text)
+					)
+				)
+			)
+		)
+	)
+)
