@@ -8,11 +8,7 @@
       "required": true,
       "types": [
         {
-          "type": "section_definition",
-          "named": true
-        },
-        {
-          "type": "struct_definition",
+          "type": "section",
           "named": true
         },
         {
@@ -23,7 +19,7 @@
     }
   },
   {
-    "type": "model_definition",
+    "type": "model",
     "named": true,
     "fields": {
       "base": {
@@ -59,7 +55,7 @@
     }
   },
   {
-    "type": "section_definition",
+    "type": "section",
     "named": true,
     "fields": {
       "body": {
@@ -91,39 +87,13 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "model_definition",
+          "type": "model",
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "struct_definition",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "body",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "text",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {

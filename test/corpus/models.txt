@@ -7,7 +7,7 @@ Some Base Model: Some Model
 ---
 
 (source_file
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 	)
@@ -27,7 +27,7 @@ Some Base Model     :      Some Model
 ---
 
 (source_file
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 	)
@@ -44,15 +44,15 @@ Base3: Model3
 ---
 
 (source_file
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 	)
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 	)
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 	)
@@ -61,7 +61,6 @@ Base3: Model3
 =========================================
 Models must start immediately on new line
 :error
-:skip
 =========================================
 
 	Base1: Model1
@@ -90,15 +89,15 @@ Base3:Model3
 ---
 
 (source_file
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 	)
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 	)
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 	)
@@ -115,14 +114,14 @@ Base1: Model1
 ---
 
 (source_file
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 		body: (body
-			(section_definition
+			(section
 				name: (text)
 			)
-			(section_definition
+			(section
 				name: (text)
 			)
 		)
@@ -141,19 +140,19 @@ Base2: Model2
 ---
 
 (source_file
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 		body: (body
-			(section_definition
+			(section
 				name: (text)
 				body: (body
-					(section_definition
+					(section
 						name: (text)
 					)
 				)
 			)
-			(section_definition
+			(section
 				name: (text)
 			)
 		)
@@ -174,27 +173,27 @@ Base2: Model2
 ---
 
 (source_file
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 		body: (body
-			(section_definition
+			(section
 				name: (text)
 				body: (body
-					(section_definition
+					(section
 						name: (text)
 						body: (body
-							(section_definition
+							(section
 								name: (text)
 							)
 						)
 					)
-					(section_definition
+					(section
 						name: (text)
 					)
 				)
 			)
-			(section_definition
+			(section
 				name: (text)
 			)
 		)
@@ -214,20 +213,20 @@ Base3: Model3
 ---
 
 (source_file
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 		body: (body
-			(section_definition
+			(section
 				name: (text)
 				body: (body
-					(section_definition
+					(section
 						name: (text)
 						body: (body
-							(section_definition
+							(section
 								name: (text)
 								body: (body
-									(section_definition
+									(section
 										name: (text)
 									)
 								)

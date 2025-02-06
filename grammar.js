@@ -10,97 +10,85 @@
 module.exports = grammar({
 	name: 'gml',
 
-	externals: $ => [$._newline, $._indent, $._dedent, $._error],
+	externals: $ => [$._line_start, $._line_end, $._indent, $._current, $._dedent, $.error],
 
 	extras: $ => [
-		/\s+/,
-	],
-
-	conflicts: $ => [
-		[$.struct_definition, $.section_definition],
+		'\r',
 	],
 
 	rules: {
-		source_file: $ => repeat1(
-			$.model_definition,
+		source_file: $ => repeat(
+			choice(
+				$.model,
+				$._line_blank,
+			),
 		),
 
-		model_definition: $ => seq(
-			field('base', alias($.model_text, $.text)),
+		model: $ => seq(
+			$._line_start,
+			field('base', alias($.key_text, $.text)),
+			optional($._w),
 			':',
+			optional($._w),
 			field('name', $.text),
-			$._newline,
-			optional(
-				field('body', alias($.model_body, $.body)),
-			),
-		),
-
-		model_body: $ => seq(
-			$._indent,
-			repeat1($.section_definition),
-			$._dedent,
-		),
-
-		body: $ => seq(
-			$._indent,
-			repeat1(
-				choice(
-					$.struct_definition,
-					$.section_definition,
-				),
-			),
-			$._dedent,
-		),
-
-		section_definition: $ => seq(
-			field('name', $.text),
-			$._newline,
+			$._line_end,
 			optional(
 				field('body', $.body),
 			),
 		),
 
-		struct_definition: $ => seq(
-			field('name', $.text),
-			$._newline,
+		section: $ => seq(
+			field('name', alias($.key_text, $.text)),
+			$._line_end,
 			optional(
-				field('body', alias($.struct_body, $.body)),
+				field('body', $.body),
 			),
 		),
 
-		struct_body: $ => seq(
+		body: $ => seq(
 			$._indent,
-			repeat1($.struct_row),
+			choice(
+				$.section,
+				$.struct_row,
+				// $.table_row,
+			),
+			repeat(
+				choice(
+					seq($._current, $.section),
+					seq($._current, $.struct_row),
+					// seq($._current, $.table_row),
+				),
+			),
 			$._dedent,
 		),
 
 		struct_row: $ => seq(
-			field('key', alias($.struc_text, $.text)),
+			field('key', alias($.key_text, $.text)),
+			optional($._w),
 			':',
+			optional($._w),
 			field('value', $.text),
-			$._newline,
-		),
-
-		table_definition: $ => seq(
-			repeat1(
-				$.table_row,
-			),
+			$._line_end,
 		),
 
 		table_row: $ => seq(
 			repeat1(
 				seq(
 					'|',
+					optional($._w),
 					alias($.table_text, $.text),
+					optional($._w),
 				),
 			),
 			'|',
-			$._newline,
+			$._line_end,
 		),
 
-		text: _ => /[^\n]+/,
-		model_text: _ => /[^:\n]+/,
+		text: _ => /[^ \t:\n][^\n]*/,
+		key_text: $ => /[^ \t:\n][^:\n]*/,
 		table_text: _ => /[^|\n]+/,
-		struc_text: _ => /[a-zA-Z_][a-zA-Z0-9_]+/,
+
+		_w: _ => /[ \t]+/,
+		_line_blank: $ => seq($._line_start, optional($._w), $._line_end),
 	},
 });

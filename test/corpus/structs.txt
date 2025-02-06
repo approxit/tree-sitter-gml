@@ -1,26 +1,37 @@
-==================================
-Struct not at model_defition level
-==================================
+=============
+Simple struct
+=============
 
 Base1: Model1
-	field: value
+	field1: value1
+	field2: value2
+	field3: value3
 
 ---
 
 (source_file
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 		body: (body
-			(section_definition
-				name: (text)
+			(struct_row
+				key: (text)
+				value: (text)
+			)
+			(struct_row
+				key: (text)
+				value: (text)
+			)
+			(struct_row
+				key: (text)
+				value: (text)
 			)
 		)
 	)
 )
 
 =============
-Simple struct
+Nested struct
 =============
 
 Base1: Model1
@@ -32,15 +43,24 @@ Base1: Model1
 ---
 
 (source_file
-	(model_definition
+	(model
 		base: (text)
 		name: (text)
 		body: (body
-			(section_definition
+			(section
 				name: (text)
 				body: (body
-					(struct_definition
-						name: (text)
+					(struct_row
+						key: (text)
+						value: (text)
+					)
+					(struct_row
+						key: (text)
+						value: (text)
+					)
+					(struct_row
+						key: (text)
+						value: (text)
 					)
 				)
 			)
