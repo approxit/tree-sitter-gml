@@ -4,13 +4,13 @@
 
 #include <wctype.h>
 
-#define DISABLE_PRINTF
+//#define DEBUG_PRINT
 
 #ifdef __EMSCRIPTEN__
-    #define DISABLE_PRINTF
+    #undef DEBUG_PRINT
 #endif
 
-#ifndef DISABLE_PRINTF
+#ifdef DEBUG_PRINT
     #include <stdio.h>
     #define PRINTF(...) printf(__VA_ARGS__)
     #define PRINT_CHAR(...) print_char(__VA_ARGS__)
@@ -23,7 +23,7 @@ enum TokenType {
     LINE_START,
     LINE_END,
     INDENT,
-    CURRENT,
+    CONTINUE,
     DEDENT,
     ERROR
 };
@@ -33,7 +33,7 @@ typedef struct {
     bool has_seen_eof;
 } Scanner;
 
-#ifndef DISABLE_PRINTF
+#ifdef DEBUG_PRINT
 void print_char(int32_t c) {
     switch (c) {
         case '\n':
@@ -89,14 +89,6 @@ static bool handle_eof(Scanner *scanner, TSLexer *lexer, const bool *valid_symbo
 
         return true;
     }
-
-//    if (valid_symbols[LINE_START]) {
-//        lexer->result_symbol = LINE_START;
-//
-//        PRINTF("[gml] end (eof): line start\n");
-//
-//        return true;
-//    }
 
     if (valid_symbols[LINE_END] && !scanner->has_seen_eof) {
         lexer->result_symbol = LINE_END;
@@ -164,9 +156,11 @@ bool tree_sitter_gml_external_scanner_scan(void *payload, TSLexer *lexer, const 
 
     PRINTF("[gml] start: char=");
     PRINT_CHAR(lexer->lookahead);
-    PRINTF(" column=%d\n", lexer->get_column(lexer));
 
-    PRINTF("[gml] \tvalid_symbols: LINE_START=%d LINE_END=%d INDENT=%d CURRENT=%d DEDENT=%d ERROR=%d\n", valid_symbols[LINE_START], valid_symbols[LINE_END], valid_symbols[INDENT], valid_symbols[CURRENT], valid_symbols[DEDENT], valid_symbols[ERROR]);
+    uint32_t column = (scanner->last_indent * 3) + lexer->get_column(lexer) + 1;
+    PRINTF(" line_with_last_indent=%d\n", column);
+
+    PRINTF("[gml] \tvalid_symbols: LINE_START=%d LINE_END=%d INDENT=%d CONTINUE=%d DEDENT=%d ERROR=%d\n", valid_symbols[LINE_START], valid_symbols[LINE_END], valid_symbols[INDENT], valid_symbols[CONTINUE], valid_symbols[DEDENT], valid_symbols[ERROR]);
 
     if (valid_symbols[ERROR]) {
         PRINTF("[gml] \tmode: ERROR\n");
@@ -183,7 +177,12 @@ bool tree_sitter_gml_external_scanner_scan(void *payload, TSLexer *lexer, const 
     if (valid_symbols[LINE_END]) {
         PRINTF("[gml] \tmode: LINE_END\n");
 
-        while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
+        bool has_seen_comment = false;
+
+        while (!lexer->eof(lexer)) {
+            if ((lexer->lookahead == '\t') || (lexer->lookahead == ' ')) {
+                skip(lexer);
+            }
             if (lexer->lookahead == '\n') {
                 skip(lexer);
                 lexer->result_symbol = LINE_END;
@@ -192,12 +191,19 @@ bool tree_sitter_gml_external_scanner_scan(void *payload, TSLexer *lexer, const 
 
                 return true;
             }
-
-            skip(lexer);
+            else if (lexer->lookahead == '#') {
+                has_seen_comment = true;
+                skip(lexer);
+            }
+            else if (has_seen_comment) {
+                skip(lexer);
+            }
+            else {
+                break;
+            }
         }
 
         if (lexer->eof(lexer)) {
-            scanner->has_seen_eof = true;
             return handle_eof(scanner, lexer, valid_symbols);
         }
     }
@@ -207,21 +213,29 @@ bool tree_sitter_gml_external_scanner_scan(void *payload, TSLexer *lexer, const 
 
         mark_end(lexer);
         uint16_t indent = 0;
+        bool has_seen_comment = false;
 
-        while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
+        while (!lexer->eof(lexer)) {
             if (lexer->lookahead == '\t') {
                 indent += 1;
                 skip(lexer);
             }
             else if (lexer->lookahead == '\n') {
+                has_seen_comment = false;
                 indent = 0;
                 skip(lexer);
             }
+            else if (lexer->lookahead == '#') {
+                has_seen_comment = true;
+                skip(lexer);
+            }
+            else if (has_seen_comment) {
+                skip(lexer);
+            }
+            else {
+                break;
+            }
         }
-//
-//        if (lexer->eof(lexer)) {
-//            return handle_eof(scanner, lexer, valid_symbols);
-//        }
 
         size_t indent_diff = indent - scanner->last_indent;
 
@@ -259,9 +273,9 @@ bool tree_sitter_gml_external_scanner_scan(void *payload, TSLexer *lexer, const 
 
             return true;
         }
-        else if ((indent_diff == 0) && valid_symbols[CURRENT]) {
+        else if ((indent_diff == 0) && valid_symbols[CONTINUE]) {
             mark_end(lexer);
-            lexer->result_symbol = CURRENT;
+            lexer->result_symbol = CONTINUE;
 
             PRINTF("[gml] end: current\n");
 

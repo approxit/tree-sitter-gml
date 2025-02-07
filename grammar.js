@@ -7,13 +7,17 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const RE_WS = " \\t";
+const RE_RESERVED = ":|#\\n";
+
 module.exports = grammar({
 	name: 'gml',
 
-	externals: $ => [$._line_start, $._line_end, $._indent, $._current, $._dedent, $.error],
+	externals: $ => [$._line_start, $._line_end, $._indent, $._continue, $._dedent, $.error],
 
 	extras: $ => [
-		'\r',
+		new RegExp(`[${RE_WS}\r]`),
+		$._comment,
 	],
 
 	rules: {
@@ -26,10 +30,8 @@ module.exports = grammar({
 
 		model: $ => seq(
 			$._line_start,
-			field('base', alias($.key_text, $.text)),
-			optional($._w),
+			field('base', alias($.text_immediate, $.text)),
 			':',
-			optional($._w),
 			field('name', $.text),
 			$._line_end,
 			optional(
@@ -38,7 +40,7 @@ module.exports = grammar({
 		),
 
 		section: $ => seq(
-			field('name', alias($.key_text, $.text)),
+			field('name', $.text),
 			$._line_end,
 			optional(
 				field('body', $.body),
@@ -50,23 +52,21 @@ module.exports = grammar({
 			choice(
 				$.section,
 				$.struct_row,
-				// $.table_row,
+				$.table_row,
 			),
 			repeat(
-				choice(
-					seq($._current, $.section),
-					seq($._current, $.struct_row),
-					// seq($._current, $.table_row),
-				),
+				seq($._continue, choice(
+					$.section,
+					$.struct_row,
+					$.table_row,
+				)),
 			),
 			$._dedent,
 		),
 
 		struct_row: $ => seq(
-			field('key', alias($.key_text, $.text)),
-			optional($._w),
+			field('key', $.text),
 			':',
-			optional($._w),
 			field('value', $.text),
 			$._line_end,
 		),
@@ -75,20 +75,20 @@ module.exports = grammar({
 			repeat1(
 				seq(
 					'|',
-					optional($._w),
-					alias($.table_text, $.text),
-					optional($._w),
+					alias($.text_or_empty, $.text),
 				),
 			),
 			'|',
 			$._line_end,
 		),
 
-		text: _ => /[^ \t:\n][^\n]*/,
-		key_text: $ => /[^ \t:\n][^:\n]*/,
-		table_text: _ => /[^|\n]+/,
+    	_comment: _ => token(seq('#', /.*/)),
 
-		_w: _ => /[ \t]+/,
-		_line_blank: $ => seq($._line_start, optional($._w), $._line_end),
+		text: $ => new RegExp(`[^${RE_RESERVED}]+`),
+		text_or_empty: _ => new RegExp(`[^${RE_RESERVED}]*`),
+		text_immediate: $ => new RegExp(`[^${RE_WS}${RE_RESERVED}][^${RE_RESERVED}]*`),
+
+		_ws: _ => new RegExp(`[${RE_WS}]+`),
+		_line_blank: $ => seq($._line_start, optional($._ws), $._line_end),
 	},
 });

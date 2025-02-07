@@ -1,0 +1,146 @@
+=============
+Minimal table
+=============
+
+Base: Model
+	| field1 |
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(table_row
+				(text)
+			)
+		)
+	)
+)
+============
+Bigger table
+============
+
+Base: Model
+	| field1 | field2 | field3 |
+	| field4 | field5 | field6 |
+
+	| field7 | field8 | field9 |
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(table_row
+				(text)
+				(text)
+				(text)
+			)
+			(table_row
+				(text)
+				(text)
+				(text)
+			)
+			(table_row
+				(text)
+				(text)
+				(text)
+			)
+		)
+	)
+)
+
+================
+Mixed rows table
+================
+
+Base: Model
+	| field1 | field2 | field3 |
+	| field4 |
+	| field5 | field6 |
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(table_row
+				(text)
+				(text)
+				(text)
+			)
+			(table_row
+				(text)
+			)
+			(table_row
+				(text)
+				(text)
+			)
+		)
+	)
+)
+
+===========
+Empty table
+===========
+
+Base: Model
+	|||
+	|||
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(table_row
+				(text)
+				(text)
+			)
+			(table_row
+				(text)
+				(text)
+			)
+		)
+	)
+)
+
+=============
+Tables can't skip opening tag
+:error
+=============
+
+Base: Model
+	field1 |
+
+---
+
+=============================
+Tables can't skip closing tag
+:error
+=============================
+
+Base: Model
+	| field1 | field2
+	| field3
+	| field4 | field5 |
+
+---
+
+=============================
+Tables can't mix with structs
+:error
+=============================
+
+Base1: Model1
+	| field: value |
+
+---

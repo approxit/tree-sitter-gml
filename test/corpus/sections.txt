@@ -1,0 +1,135 @@
+===============
+Simple sections
+===============
+
+Base1: Model1
+	some example section 1
+	some example section 2
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(section
+				name: (text)
+			)
+			(section
+				name: (text)
+			)
+		)
+	)
+)
+
+===============
+Nested sections
+===============
+
+Base2: Model2
+	section1
+		section2
+	section3
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(section
+				name: (text)
+				body: (body
+					(section
+						name: (text)
+					)
+				)
+			)
+			(section
+				name: (text)
+			)
+		)
+	)
+)
+
+====================
+Deep nested sections
+====================
+
+Base2: Model2
+	section1
+		section2
+			section3
+		section4
+	section5
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(section
+				name: (text)
+				body: (body
+					(section
+						name: (text)
+						body: (body
+							(section
+								name: (text)
+							)
+						)
+					)
+					(section
+						name: (text)
+					)
+				)
+			)
+			(section
+				name: (text)
+			)
+		)
+	)
+)
+
+=============================
+Trailing deep nested sections
+=============================
+
+Base3: Model3
+	section1
+		section2
+			section3
+				section4
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(section
+				name: (text)
+				body: (body
+					(section
+						name: (text)
+						body: (body
+							(section
+								name: (text)
+								body: (body
+									(section
+										name: (text)
+									)
+								)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+)

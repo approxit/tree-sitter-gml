@@ -1,0 +1,157 @@
+====================
+Comments on models
+====================
+
+# comment1
+	# comment2
+Base1: Model1 # comment3
+
+# comment4
+		# tabbed comment5
+  # spaced comment6
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+	)
+)
+
+====================
+Comments on sections
+====================
+
+Base1: Model1
+	# comment1
+							# comment2
+	section1#comment3
+		# comment4
+	# comment5
+	section2 # comment6
+	# comment7
+		# comment8
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(section
+				name: (text)
+			)
+			(section
+				name: (text)
+			)
+		)
+	)
+)
+
+===================
+Comments on structs
+===================
+
+Base1: Model1
+	# comment1
+							# comment2
+	field1: value1#comment3
+		# comment4
+	# comment5
+	field2: value2 # comment6
+	# comment7
+		# comment8
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(struct_row
+				key: (text)
+				value: (text)
+			)
+			(struct_row
+				key: (text)
+				value: (text)
+			)
+		)
+	)
+)
+
+===================
+Comments on tables
+===================
+
+Base1: Model1
+	# comment1
+							# comment2
+	| field1 |#comment3
+		# comment4
+	# comment5
+	| field2 | field3 | # comment6
+	# comment7
+		# comment8
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(table_row
+				(text)
+			)
+			(table_row
+				(text)
+				(text)
+			)
+		)
+	)
+)
+
+=============================
+Comments will cut off structs
+=============================
+
+Base1: Model1
+	section1 # : comment3
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(section
+				name: (text)
+			)
+		)
+	)
+)
+
+============================
+Comments will cut off tables
+============================
+
+Base1: Model1
+	| field1 | # comment3 |
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(table_row
+				(text)
+			)
+		)
+	)
+)

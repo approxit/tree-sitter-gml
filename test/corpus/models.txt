@@ -1,6 +1,6 @@
-=========================
-Single model without body
-=========================
+============
+Simple model
+============
 
 Some Base Model: Some Model
 
@@ -13,9 +13,9 @@ Some Base Model: Some Model
 	)
 )
 
-==============================================
-Single model without body and with whitespaces
-==============================================
+=============================
+Simple model with whitespaces
+=============================
 
 
 
@@ -33,9 +33,9 @@ Some Base Model     :      Some Model
 	)
 )
 
-============================
-Multiple models without body
-============================
+===============
+Multiple models
+===============
 
 Base1: Model1
 Base2: Model2
@@ -58,18 +58,9 @@ Base3: Model3
 	)
 )
 
-=========================================
-Models must start immediately on new line
-:error
-=========================================
-
-	Base1: Model1
-
----
-
-=================================================
-Multiple models without body and with whitespaces
-=================================================
+================================
+Multiple models with whitespaces
+================================
 
 Base1  : Model1
 
@@ -103,138 +94,65 @@ Base3:Model3
 	)
 )
 
-==============================
-Model with not nested children
-==============================
+===================================
+Models can't have multiple colons 1
+:error
+===================================
 
-Base1: Model1
-	section1
-	section2
-
----
-
-(source_file
-	(model
-		base: (text)
-		name: (text)
-		body: (body
-			(section
-				name: (text)
-			)
-			(section
-				name: (text)
-			)
-		)
-	)
-)
-
-=================================
-Model with single nested children
-=================================
-
-Base2: Model2
-	section1
-		section2
-	section3
+Base1:: Model1
 
 ---
 
-(source_file
-	(model
-		base: (text)
-		name: (text)
-		body: (body
-			(section
-				name: (text)
-				body: (body
-					(section
-						name: (text)
-					)
-				)
-			)
-			(section
-				name: (text)
-			)
-		)
-	)
-)
+===================================
+Models can't have multiple colons 2
+:error
+===================================
 
-===============================
-Model with deep nested children
-===============================
-
-Base2: Model2
-	section1
-		section2
-			section3
-		section4
-	section5
+Ba:se1: Model1
 
 ---
 
-(source_file
-	(model
-		base: (text)
-		name: (text)
-		body: (body
-			(section
-				name: (text)
-				body: (body
-					(section
-						name: (text)
-						body: (body
-							(section
-								name: (text)
-							)
-						)
-					)
-					(section
-						name: (text)
-					)
-				)
-			)
-			(section
-				name: (text)
-			)
-		)
-	)
-)
+===================================
+Models can't have multiple colons 3
+:error
+===================================
 
-========================================
-Model with trailing deep nested children
-========================================
-
-Base3: Model3
-	section1
-		section2
-			section3
-				section4
+Base1: Mo:del1
 
 ---
 
-(source_file
-	(model
-		base: (text)
-		name: (text)
-		body: (body
-			(section
-				name: (text)
-				body: (body
-					(section
-						name: (text)
-						body: (body
-							(section
-								name: (text)
-								body: (body
-									(section
-										name: (text)
-									)
-								)
-							)
-						)
-					)
-				)
-			)
-		)
-	)
-)
+===========================
+Models can't have empty base
+:error
+===========================
+
+: Model1
+
+---
+
+===========================
+Models can't have empty name
+:error
+===========================
+
+Base:
+
+---
+
+==========================
+Models can't start from tab
+:error
+==========================
+
+	Base1: Model1
+
+---
+
+=============================
+Models can't start from spaces
+:error
+=============================
+
+  Base1: Model1
+
+---

@@ -14,6 +14,10 @@
         {
           "type": "struct_row",
           "named": true
+        },
+        {
+          "type": "table_row",
+          "named": true
         }
       ]
     }
@@ -123,11 +127,30 @@
     }
   },
   {
+    "type": "table_row",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": ":",
     "named": false
   },
   {
     "type": "text",
     "named": true
+  },
+  {
+    "type": "|",
+    "named": false
   }
 ]
