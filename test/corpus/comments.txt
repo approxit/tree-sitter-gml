@@ -1,18 +1,19 @@
-====================
-Comments on models
-====================
+===================
+Comments on objects
+===================
 
 # comment1
 	# comment2
-Base1: Model1 # comment3
+Base1: Object1 # comment3
 
 # comment4
 		# tabbed comment5
   # spaced comment6
+
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 	)
@@ -22,7 +23,7 @@ Base1: Model1 # comment3
 Comments on sections
 ====================
 
-Base1: Model1
+Base1: Object1
 	# comment1
 							# comment2
 	section1#comment3
@@ -35,7 +36,7 @@ Base1: Model1
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -53,20 +54,20 @@ Base1: Model1
 Comments on structs
 ===================
 
-Base1: Model1
+Base1: Object1
 	# comment1
 							# comment2
-	field1: value1#comment3
+	field1 = value1#comment3
 		# comment4
 	# comment5
-	field2: value2 # comment6
+	field2 = value2 # comment6
 	# comment7
 		# comment8
 
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -86,7 +87,7 @@ Base1: Model1
 Comments on tables
 ===================
 
-Base1: Model1
+Base1: Object1
 	# comment1
 							# comment2
 	| field1 |#comment3
@@ -99,7 +100,7 @@ Base1: Model1
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -118,13 +119,13 @@ Base1: Model1
 Comments will cut off structs
 =============================
 
-Base1: Model1
-	section1 # : comment3
+Base1: Object1
+	section1 # = comment3
 
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -139,13 +140,13 @@ Base1: Model1
 Comments will cut off tables
 ============================
 
-Base1: Model1
+Base1: Object1
 	| field1 | # comment3 |
 
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body

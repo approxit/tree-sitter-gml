@@ -181,7 +181,7 @@ bool tree_sitter_gml_external_scanner_scan(void *payload, TSLexer *lexer, const 
             if ((lexer->lookahead == '\t') || (lexer->lookahead == ' ')) {
                 skip(lexer);
             }
-            if (lexer->lookahead == '\n') {
+            else if (lexer->lookahead == '\n') {
                 skip(lexer);
                 lexer->result_symbol = LINE_END;
 

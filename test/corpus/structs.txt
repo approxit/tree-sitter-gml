@@ -2,16 +2,16 @@
 Simple struct
 =============
 
-Base1: Model1
-	field1: value1
-	field2: value2
+Base1: Object1
+	field1 = value1
+	field2 = value2
 
-	field3: value3
+	field3 = value3
 
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -35,16 +35,16 @@ Base1: Model1
 Nested struct
 =============
 
-Base1: Model1
+Base1: Object1
 	section1
-		field1: value1
-		field2: value2
-		field3: value3
+		field1 = value1
+		field2 = value2
+		field3 = value3
 
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -73,19 +73,19 @@ Base1: Model1
 Mixed struct
 ============
 
-Base1: Model1
+Base1: Object1
 	section1
-		field1: value1
+		field1 = value1
 		section1
-		field2: value2
+		field2 = value2
 		section2
-		field3: value3
+		field3 = value3
 		section3
 
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -125,8 +125,8 @@ Structs can't have multiple colons 1
 :error
 ====================================
 
-Base1: Model1
-	field1:: value1
+Base1: Object1
+	field1 == value1
 
 ---
 
@@ -135,8 +135,8 @@ Structs can't have multiple colons 2
 :error
 ====================================
 
-Base1: Model1
-	fie:ld1: value1
+Base1: Object1
+	fie=ld1 = value1
 
 ---
 
@@ -145,8 +145,8 @@ Structs can't have multiple colons 3
 :error
 ====================================
 
-Base1: Model1
-	field1: val:ue1
+Base1: Object1
+	field1 = val:ue1
 
 ---
 
@@ -155,8 +155,8 @@ Structs can't have empty field
 :error
 ==============================
 
-Base1: Model1
-	: Model1
+Base1: Object1
+	= Object1
 
 ---
 
@@ -165,8 +165,8 @@ Structs can't have empty value
 :error
 ==============================
 
-Base1: Model1
-	field1:
+Base1: Object1
+	field1=
 
 ---
 
@@ -175,7 +175,7 @@ Structs can't mix with tables
 :error
 =============================
 
-Base1: Model1
-	field1: | value1 |
+Base1: Object1
+	field1= | value1 |
 
 ---

@@ -2,13 +2,13 @@
 Minimal table
 =============
 
-Base: Model
+Base: Object
 	| field1 |
 
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -22,7 +22,7 @@ Base: Model
 Bigger table
 ============
 
-Base: Model
+Base: Object
 	| field1 | field2 | field3 |
 	| field4 | field5 | field6 |
 
@@ -31,7 +31,7 @@ Base: Model
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -58,7 +58,7 @@ Base: Model
 Mixed rows table
 ================
 
-Base: Model
+Base: Object
 	| field1 | field2 | field3 |
 	| field4 |
 	| field5 | field6 |
@@ -66,7 +66,7 @@ Base: Model
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -86,39 +86,23 @@ Base: Model
 	)
 )
 
-===========
-Empty table
-===========
+=============
+Tables can't be empty
+:error
+=============
 
-Base: Model
+Base: Object
 	|||
 	|||
 
 ---
-
-(source_file
-	(model
-		base: (text)
-		name: (text)
-		body: (body
-			(table_row
-				(text)
-				(text)
-			)
-			(table_row
-				(text)
-				(text)
-			)
-		)
-	)
-)
 
 =============
 Tables can't skip opening tag
 :error
 =============
 
-Base: Model
+Base: Object
 	field1 |
 
 ---
@@ -128,7 +112,7 @@ Tables can't skip closing tag
 :error
 =============================
 
-Base: Model
+Base: Object
 	| field1 | field2
 	| field3
 	| field4 | field5 |
@@ -140,7 +124,7 @@ Tables can't mix with structs
 :error
 =============================
 
-Base1: Model1
-	| field: value |
+Base1: Object1
+	| field= value |
 
 ---

@@ -1,0 +1,217 @@
+=============
+Simple object
+=============
+
+Some Base Object: Some Object
+
+---
+
+(source_file
+	(object
+		base: (text)
+		name: (text)
+	)
+)
+
+==============================
+Simple object with whitespaces
+==============================
+
+
+
+
+Some Base Object     :      Some Object
+
+
+
+---
+
+(source_file
+	(object
+		base: (text)
+		name: (text)
+	)
+)
+
+================
+Multiple objects
+================
+
+Base1: Object1
+Base2: Object2
+Base3: Object3
+
+---
+
+(source_file
+	(object
+		base: (text)
+		name: (text)
+	)
+	(object
+		base: (text)
+		name: (text)
+	)
+	(object
+		base: (text)
+		name: (text)
+	)
+)
+
+=================================
+Multiple objects with whitespaces
+=================================
+
+Base1  : Object1
+
+
+
+Base2 :Object2
+
+
+
+
+Base3:Object3
+
+
+
+
+
+---
+
+(source_file
+	(object
+		base: (text)
+		name: (text)
+	)
+	(object
+		base: (text)
+		name: (text)
+	)
+	(object
+		base: (text)
+		name: (text)
+	)
+)
+
+==============
+Nested objects
+==============
+
+Base1: Object1
+	Base2: Object2
+		Base3: Object3
+
+---
+
+(source_file
+	(object
+		base: (text)
+		name: (text)
+		body: (body
+			(object
+				base: (text)
+				name: (text)
+				body: (body
+					(object
+						base: (text)
+						name: (text)
+					)
+				)
+			)
+		)
+	)
+)
+
+====================================
+Objects can't have multiple colons 1
+:error
+====================================
+
+Base1:: Object1
+
+---
+
+====================================
+Objects can't have multiple colons 2
+:error
+====================================
+
+Ba:se1: Object1
+
+---
+
+====================================
+Objects can't have multiple colons 3
+:error
+====================================
+
+Base1: Mo:del1
+
+---
+
+=============================
+Objects can't have empty base
+:error
+=============================
+
+: Object1
+
+---
+
+=============================
+Objects can't have empty name
+:error
+=============================
+
+Base:
+
+---
+
+============================
+Objects can't start from tab
+:error
+============================
+
+	Base1: Object1
+
+---
+
+===============================
+Objects can't start from spaces
+:error
+===============================
+
+  Base1: Object1
+
+---
+
+=============================================
+Objects can't have double indented sections 1
+:error
+=============================================
+
+Base1: Object1
+		too much nested section
+
+---
+
+=============================================
+Objects can't have double indented sections 2
+:error
+=============================================
+
+Base1: Object1
+		too = many indents
+
+---
+
+=============================================
+Objects can't have double indented sections 3
+:error
+=============================================
+
+Base1: Object1
+		| too | many | indents |
+
+---

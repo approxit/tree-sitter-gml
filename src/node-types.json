@@ -8,6 +8,10 @@
       "required": true,
       "types": [
         {
+          "type": "object",
+          "named": true
+        },
+        {
           "type": "section",
           "named": true
         },
@@ -23,7 +27,7 @@
     }
   },
   {
-    "type": "model",
+    "type": "object",
     "named": true,
     "fields": {
       "base": {
@@ -94,7 +98,7 @@
       "required": false,
       "types": [
         {
-          "type": "model",
+          "type": "object",
           "named": true
         }
       ]
@@ -143,6 +147,10 @@
   },
   {
     "type": ":",
+    "named": false
+  },
+  {
+    "type": "=",
     "named": false
   },
   {

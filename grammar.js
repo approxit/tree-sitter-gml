@@ -8,7 +8,7 @@
 // @ts-check
 
 const RE_WS = ' \\t';
-const RE_RESERVED = ':|#\\t\\n';
+const RE_RESERVED = ':=|#\\t\\n';
 
 module.exports = grammar({
 	name: 'gml',
@@ -16,22 +16,22 @@ module.exports = grammar({
 	externals: $ => [$._line_start, $._line_end, $._indent, $._continue, $._dedent, $.error],
 
 	extras: $ => [
-		new RegExp(`[${RE_WS}\r]`),
-		$._comment,
+		/[\r]/,
 	],
 
 	rules: {
 		source_file: $ => repeat(
 			choice(
-				$.model,
+				seq($._line_start, $.object),
 				$._line_blank,
 			),
 		),
 
-		model: $ => seq(
-			$._line_start,
-			field('base', alias($.text_immediate, $.text)),
+		object: $ => seq(
+			field('base', $.text),
+			optional($._ws),
 			':',
+			optional($._ws),
 			field('name', $.text),
 			$._line_end,
 			optional(
@@ -50,12 +50,14 @@ module.exports = grammar({
 		body: $ => seq(
 			$._indent,
 			choice(
+				$.object,
 				$.section,
 				$.struct_row,
 				$.table_row,
 			),
 			repeat(
 				seq($._continue, choice(
+					$.object,
 					$.section,
 					$.struct_row,
 					$.table_row,
@@ -66,7 +68,9 @@ module.exports = grammar({
 
 		struct_row: $ => seq(
 			field('key', $.text),
-			':',
+			optional($._ws),
+			'=',
+			optional($._ws),
 			field('value', $.text),
 			$._line_end,
 		),
@@ -75,20 +79,18 @@ module.exports = grammar({
 			repeat1(
 				seq(
 					'|',
-					alias($.text_or_empty, $.text),
+					optional($._ws),
+					$.text,
+					optional($._ws),
 				),
 			),
 			'|',
 			$._line_end,
 		),
 
-		_comment: _ => token(seq('#', /.*/)),
-
-		text: $ => new RegExp(`[^${RE_RESERVED}]+`),
-		text_or_empty: _ => new RegExp(`[^${RE_RESERVED}]*`),
-		text_immediate: $ => new RegExp(`[^${RE_WS}${RE_RESERVED}][^${RE_RESERVED}]*`),
+		text: $ => new RegExp(`[^${RE_WS}${RE_RESERVED}]+([${RE_WS}]+[^${RE_WS}${RE_RESERVED}]+)*`),
 
 		_ws: _ => new RegExp(`[${RE_WS}]+`),
-		_line_blank: $ => seq($._line_start, optional($._ws), $._line_end),
+		_line_blank: $ => seq($._line_start, $._line_end),
 	},
 });

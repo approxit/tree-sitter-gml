@@ -2,14 +2,14 @@
 Simple sections
 ===============
 
-Base1: Model1
+Base1: Object1
 	some example section 1
 	some example section 2
 
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -27,7 +27,7 @@ Base1: Model1
 Nested sections
 ===============
 
-Base2: Model2
+Base2: Object2
 	section1
 		section2
 	section3
@@ -35,7 +35,7 @@ Base2: Model2
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -58,7 +58,7 @@ Base2: Model2
 Deep nested sections
 ====================
 
-Base2: Model2
+Base2: Object2
 	section1
 		section2
 			section3
@@ -68,7 +68,7 @@ Base2: Model2
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -99,7 +99,7 @@ Base2: Model2
 Trailing deep nested sections
 =============================
 
-Base3: Model3
+Base3: Object3
 	section1
 		section2
 			section3
@@ -108,7 +108,7 @@ Base3: Model3
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -138,7 +138,7 @@ Base3: Model3
 Continue from deeply nested section
 ===================================
 
-Base3: Model3
+Base3: Object3
 	section1
 		section2
 			section3
@@ -149,7 +149,7 @@ Base3: Model3
 ---
 
 (source_file
-	(model
+	(object
 		base: (text)
 		name: (text)
 		body: (body
@@ -178,12 +178,12 @@ Base3: Model3
 	)
 )
 
-============================================
+==============================================
 Sections can't have double indented children 1
 :error
-============================================
+==============================================
 
-Base1: Model1
+Base1: Object1
 	section1
 			too much indentation
 
@@ -194,9 +194,9 @@ Sections can't have double indented children 2
 :error
 ==============================================
 
-Base1: Model1
+Base1: Object1
 	section1
-			too: many indent
+			too = many indent
 
 ---
 
@@ -205,7 +205,7 @@ Sections can't have double indented children 3
 :error
 ==============================================
 
-Base1: Model1
+Base1: Object1
 	section1
 			| too | many | indents |
 
