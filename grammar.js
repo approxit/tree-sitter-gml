@@ -7,8 +7,8 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const RE_WS = " \\t";
-const RE_RESERVED = ":|#\\n";
+const RE_WS = ' \\t';
+const RE_RESERVED = ':|#\\t\\n';
 
 module.exports = grammar({
 	name: 'gml',
@@ -82,7 +82,7 @@ module.exports = grammar({
 			$._line_end,
 		),
 
-    	_comment: _ => token(seq('#', /.*/)),
+		_comment: _ => token(seq('#', /.*/)),
 
 		text: $ => new RegExp(`[^${RE_RESERVED}]+`),
 		text_or_empty: _ => new RegExp(`[^${RE_RESERVED}]*`),

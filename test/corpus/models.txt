@@ -156,3 +156,33 @@ Models can't start from spaces
   Base1: Model1
 
 ---
+
+============================================
+Models can't have double indented sections 1
+:error
+============================================
+
+Base1: Model1
+		too much nested section
+
+---
+
+============================================
+Models can't have double indented sections 2
+:error
+============================================
+
+Base1: Model1
+		too: many indents
+
+---
+
+============================================
+Models can't have double indented sections 3
+:error
+============================================
+
+Base1: Model1
+		| too | many | indents |
+
+---

@@ -245,15 +245,15 @@
     },
     "text": {
       "type": "PATTERN",
-      "value": "[^:|#\\n]+"
+      "value": "[^:|#\\t\\n]+"
     },
     "text_or_empty": {
       "type": "PATTERN",
-      "value": "[^:|#\\n]*"
+      "value": "[^:|#\\t\\n]*"
     },
     "text_immediate": {
       "type": "PATTERN",
-      "value": "[^ \\t:|#\\n][^:|#\\n]*"
+      "value": "[^ \\t:|#\\t\\n][^:|#\\t\\n]*"
     },
     "_ws": {
       "type": "PATTERN",

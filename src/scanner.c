@@ -79,8 +79,6 @@ static inline void mark_end(TSLexer *lexer) {
 static bool handle_eof(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
     PRINTF("[gml] \tmode: EOF\n");
 
-    mark_end(lexer);
-
     if (valid_symbols[DEDENT] && (0 < scanner->last_indent)) {
         scanner->last_indent -= 1;
         lexer->result_symbol = DEDENT;
@@ -237,9 +235,9 @@ bool tree_sitter_gml_external_scanner_scan(void *payload, TSLexer *lexer, const 
             }
         }
 
-        size_t indent_diff = indent - scanner->last_indent;
+        int32_t indent_diff = indent - scanner->last_indent;
 
-        PRINTF("[gml] \tlast_indent=%d indent=%d indent_diff=%ld\n", scanner->last_indent, indent, indent_diff);
+        PRINTF("[gml] \tlast_indent=%d indent=%d indent_diff=%d\n", scanner->last_indent, indent, indent_diff);
 
         if ((indent_diff == 1) && valid_symbols[INDENT]) {
             mark_end(lexer);
@@ -258,7 +256,7 @@ bool tree_sitter_gml_external_scanner_scan(void *payload, TSLexer *lexer, const 
 
             return true;
         }
-        else if ((indent_diff == -1) && valid_symbols[DEDENT]) {
+        else if ((indent_diff < 0) && valid_symbols[DEDENT]) {
             if (scanner->last_indent == 0) {
                 lexer->result_symbol = ERROR;
 

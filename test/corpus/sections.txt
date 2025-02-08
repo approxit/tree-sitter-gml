@@ -133,3 +133,80 @@ Base3: Model3
 		)
 	)
 )
+
+===================================
+Continue from deeply nested section
+===================================
+
+Base3: Model3
+	section1
+		section2
+			section3
+				section4
+
+	section5
+
+---
+
+(source_file
+	(model
+		base: (text)
+		name: (text)
+		body: (body
+			(section
+				name: (text)
+				body: (body
+					(section
+						name: (text)
+						body: (body
+							(section
+								name: (text)
+								body: (body
+									(section
+										name: (text)
+									)
+								)
+							)
+						)
+					)
+				)
+			)
+			(section
+				name: (text)
+			)
+		)
+	)
+)
+
+============================================
+Sections can't have double indented children 1
+:error
+============================================
+
+Base1: Model1
+	section1
+			too much indentation
+
+---
+
+==============================================
+Sections can't have double indented children 2
+:error
+==============================================
+
+Base1: Model1
+	section1
+			too: many indent
+
+---
+
+==============================================
+Sections can't have double indented children 3
+:error
+==============================================
+
+Base1: Model1
+	section1
+			| too | many | indents |
+
+---
