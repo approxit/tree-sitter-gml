@@ -1,0 +1,96 @@
+===========================
+Single reference in section
+===========================
+
+Base1: Object1
+	[reference1]
+
+---
+
+(source_file
+	(object
+		base: (identifier)
+		name: (identifier)
+		body: (body
+			(section
+				name: (text
+					(reference)
+				)
+			)
+		)
+	)
+)
+
+==============================
+Multiple references in section
+==============================
+
+Base1: Object1
+	[reference1][reference2][reference3]
+	[reference1] [reference2] [reference3]
+
+---
+
+(source_file
+	(object
+		base: (identifier)
+		name: (identifier)
+		body: (body
+			(section
+				name: (text
+					(reference)
+					(reference)
+					(reference)
+				)
+			)
+			(section
+				name: (text
+					(reference)
+					(text_fragment)
+					(reference)
+					(text_fragment)
+					(reference)
+				)
+			)
+		)
+	)
+)
+
+===========================
+Mixed references in section
+===========================
+
+Base1: Object1
+	text1 [reference1]
+	text2[reference2]
+	text1 [reference3] text3
+
+---
+
+(source_file
+	(object
+		base: (identifier)
+		name: (identifier)
+		body: (body
+			(section
+				name: (text
+					(text_fragment)
+					(reference)
+				)
+			)
+			(section
+				name: (text
+					(text_fragment)
+					(reference)
+				)
+			)
+			(section
+				name: (text
+					(text_fragment)
+					(reference)
+					(text_fragment)
+				)
+			)
+		)
+	)
+)

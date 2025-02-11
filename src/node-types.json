@@ -154,6 +154,10 @@
       "required": true,
       "types": [
         {
+          "type": "reference",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -178,6 +182,10 @@
   },
   {
     "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "reference",
     "named": true
   },
   {

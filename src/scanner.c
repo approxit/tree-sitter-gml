@@ -175,6 +175,8 @@ static inline ResultType handle_identifier_text_start_text_fragment(TSLexer *lex
             || (lexer->lookahead == '|')
             || (lexer->lookahead == '#')
             || (lexer->lookahead == '"')
+            || (lexer->lookahead == '[')
+            || (lexer->lookahead == ']')
             || (lexer->lookahead == '\n')) {
             break;
         }
@@ -195,7 +197,10 @@ static inline ResultType handle_identifier_text_start_text_fragment(TSLexer *lex
         return NO_RETURN;
     }
 
-    if (valid_symbols[TEXT_START] && (lexer->lookahead != ':') && (lexer->lookahead != '=') && (lexer->lookahead != '|')) {
+    if (valid_symbols[TEXT_START]
+            && (lexer->lookahead != ':')
+            && (lexer->lookahead != '=')
+            && (lexer->lookahead != '|')) {
         mark_end(lexer);
 
         lexer->result_symbol = TEXT_START;

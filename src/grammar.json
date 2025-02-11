@@ -301,6 +301,10 @@
         }
       ]
     },
+    "reference": {
+      "type": "PATTERN",
+      "value": "\\[[^]]*\\]"
+    },
     "text": {
       "type": "CHOICE",
       "members": [
@@ -336,6 +340,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "string"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "reference"
                 }
               ]
             },
@@ -351,6 +359,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "string"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "reference"
                   }
                 ]
               }

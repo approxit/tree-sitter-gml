@@ -102,17 +102,21 @@ module.exports = grammar({
 			$._line_end,
 		),
 
+		reference: $ => /\[[^]]*\]/,
+
 		text: $ => choice(
 			seq(alias($.identifier, $.text_fragment)),
 			seq(
 				choice(
 					alias($.text_start, $.text_fragment),
 					$.string,
+					$.reference,
 				),
 				repeat(
 					choice(
 						$.text_fragment,
 						$.string,
+						$.reference,
 					),
 				),
 			),
