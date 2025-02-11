@@ -1,0 +1,142 @@
+========================
+Single string in section
+========================
+
+Base1: Object1
+	"string1"
+
+---
+
+(source_file
+	(object
+		base: (identifier)
+		name: (identifier)
+		body: (body
+			(section
+				name: (text
+					(string)
+				)
+			)
+		)
+	)
+)
+
+===========================
+Multiple strings in section
+===========================
+
+Base1: Object1
+	"string1" "string2" "string3"
+	"string4""string5""string6"
+
+---
+
+(source_file
+	(object
+		base: (identifier)
+		name: (identifier)
+		body: (body
+			(section
+				name: (text
+					(string)
+					(text_fragment)
+					(string)
+					(text_fragment)
+					(string)
+				)
+			)
+			(section
+				name: (text
+					(string)
+					(string)
+					(string)
+				)
+			)
+		)
+	)
+)
+
+========================
+Mixed strings in section
+========================
+
+Base1: Object1
+	text1 "string1"
+	text2"string1"
+	text1 "string1" text3
+
+---
+
+(source_file
+	(object
+		base: (identifier)
+		name: (identifier)
+		body: (body
+			(section
+				name: (text
+					(text_fragment)
+					(string)
+				)
+			)
+			(section
+				name: (text
+					(text_fragment)
+					(string)
+				)
+			)
+			(section
+				name: (text
+					(text_fragment)
+					(string)
+					(text_fragment)
+				)
+			)
+		)
+	)
+)
+
+=================================
+String consume sepcial characters
+=================================
+
+Base1: Object1
+	"sepcial : are = comused | too"
+
+---
+
+(source_file
+	(object
+		base: (identifier)
+		name: (identifier)
+		body: (body
+			(section
+				name: (text
+					(string)
+				)
+			)
+		)
+	)
+)
+
+========================
+String can escape quotes
+========================
+
+Base1: Object1
+	"escaped \" quotes"
+
+---
+
+(source_file
+	(object
+		base: (identifier)
+		name: (identifier)
+		body: (body
+			(section
+				name: (text
+					(string)
+				)
+			)
+		)
+	)
+)

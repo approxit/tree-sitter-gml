@@ -5,27 +5,32 @@ Simple struct
 Base1: Object1
 	field1 = value1
 	field2 = value2
-
 	field3 = value3
 
 ---
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
 		body: (body
 			(struct_row
-				key: (text)
-				value: (text)
+				key: (identifier)
+				value: (text
+					(text_fragment)
+				)
 			)
 			(struct_row
-				key: (text)
-				value: (text)
+				key: (identifier)
+				value: (text
+					(text_fragment)
+				)
 			)
 			(struct_row
-				key: (text)
-				value: (text)
+				key: (identifier)
+				value: (text
+					(text_fragment)
+				)
 			)
 		)
 	)
@@ -45,23 +50,31 @@ Base1: Object1
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
 		body: (body
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
 				body: (body
 					(struct_row
-						key: (text)
-						value: (text)
+						key: (identifier)
+						value: (text
+							(text_fragment)
+						)
 					)
 					(struct_row
-						key: (text)
-						value: (text)
+						key: (identifier)
+						value: (text
+							(text_fragment)
+						)
 					)
 					(struct_row
-						key: (text)
-						value: (text)
+						key: (identifier)
+						value: (text
+							(text_fragment)
+						)
 					)
 				)
 			)
@@ -86,39 +99,52 @@ Base1: Object1
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
 		body: (body
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
 				body: (body
 					(struct_row
-						key: (text)
-						value: (text)
+						key: (identifier)
+						value: (text
+							(text_fragment)
+						)
 					)
 					(section
-						name: (text)
+						name: (text
+							(text_fragment)
+						)
 					)
 					(struct_row
-						key: (text)
-						value: (text)
+						key: (identifier)
+						value: (text
+							(text_fragment)
+						)
 					)
 					(section
-						name: (text)
+						name: (text
+							(text_fragment)
+						)
 					)
 					(struct_row
-						key: (text)
-						value: (text)
+						key: (identifier)
+						value: (text
+							(text_fragment)
+						)
 					)
 					(section
-						name: (text)
+						name: (text
+							(text_fragment)
+						)
 					)
 				)
 			)
 		)
 	)
 )
-
 
 ====================================
 Structs can't have multiple colons 1

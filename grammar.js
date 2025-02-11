@@ -8,31 +8,43 @@
 // @ts-check
 
 const RE_WS = ' \\t';
-const RE_RESERVED = ':=|#\\t\\n';
+const RE_RESERVED = ':=|#"\\[\\]\\t\\n';
 
 module.exports = grammar({
 	name: 'gml',
 
-	externals: $ => [$._line_start, $._line_end, $._indent, $._continue, $._dedent, $.error],
+	externals: $ => [
+		$._line_end,
+		$._indent,
+		$._continue,
+		$._dedent,
+		$.identifier,
+		$.text_start,
+		$.text_fragment,
+		$.string,
+		$.comment,
+		$.error,
+	],
 
 	extras: $ => [
 		/[\r]/,
+		$.comment,
 	],
 
 	rules: {
 		source_file: $ => repeat(
 			choice(
-				seq($._line_start, $.object),
-				$._line_blank,
+				$.object,
+				$._line_end,
 			),
 		),
 
 		object: $ => seq(
-			field('base', $.text),
+			field('base', $.identifier),
 			optional($._ws),
 			':',
 			optional($._ws),
-			field('name', $.text),
+			field('name', $.identifier),
 			$._line_end,
 			optional(
 				field('body', $.body),
@@ -54,6 +66,7 @@ module.exports = grammar({
 				$.section,
 				$.struct_row,
 				$.table_row,
+				$._line_end,
 			),
 			repeat(
 				seq($._continue, choice(
@@ -61,13 +74,14 @@ module.exports = grammar({
 					$.section,
 					$.struct_row,
 					$.table_row,
+					$._line_end,
 				)),
 			),
 			$._dedent,
 		),
 
 		struct_row: $ => seq(
-			field('key', $.text),
+			field('key', $.identifier),
 			optional($._ws),
 			'=',
 			optional($._ws),
@@ -88,9 +102,22 @@ module.exports = grammar({
 			$._line_end,
 		),
 
-		text: $ => new RegExp(`[^${RE_WS}${RE_RESERVED}]+([${RE_WS}]+[^${RE_WS}${RE_RESERVED}]+)*`),
+		text: $ => choice(
+			seq(alias($.identifier, $.text_fragment)),
+			seq(
+				choice(
+					alias($.text_start, $.text_fragment),
+					$.string,
+				),
+				repeat(
+					choice(
+						$.text_fragment,
+						$.string,
+					),
+				),
+			),
+		),
 
 		_ws: _ => new RegExp(`[${RE_WS}]+`),
-		_line_blank: $ => seq($._line_start, $._line_end),
 	},
 });

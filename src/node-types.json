@@ -5,7 +5,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "object",
@@ -35,7 +35,7 @@
         "required": true,
         "types": [
           {
-            "type": "text",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -55,7 +55,7 @@
         "required": true,
         "types": [
           {
-            "type": "text",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -113,7 +113,7 @@
         "required": true,
         "types": [
           {
-            "type": "text",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -146,6 +146,25 @@
     }
   },
   {
+    "type": "text",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "text_fragment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": ":",
     "named": false
   },
@@ -154,7 +173,19 @@
     "named": false
   },
   {
-    "type": "text",
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "string",
+    "named": true
+  },
+  {
+    "type": "text_fragment",
     "named": true
   },
   {

@@ -8,21 +8,12 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_line_start"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "object"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "object"
           },
           {
             "type": "SYMBOL",
-            "name": "_line_blank"
+            "name": "_line_end"
           }
         ]
       }
@@ -35,7 +26,7 @@
           "name": "base",
           "content": {
             "type": "SYMBOL",
-            "name": "text"
+            "name": "identifier"
           }
         },
         {
@@ -71,7 +62,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "text"
+            "name": "identifier"
           }
         },
         {
@@ -154,6 +145,10 @@
             {
               "type": "SYMBOL",
               "name": "table_row"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_line_end"
             }
           ]
         },
@@ -184,6 +179,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "table_row"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_line_end"
                   }
                 ]
               }
@@ -204,7 +203,7 @@
           "name": "key",
           "content": {
             "type": "SYMBOL",
-            "name": "text"
+            "name": "identifier"
           }
         },
         {
@@ -303,40 +302,81 @@
       ]
     },
     "text": {
-      "type": "PATTERN",
-      "value": "[^ \\t:=|#\\t\\n]+([ \\t]+[^ \\t:=|#\\t\\n]+)*"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              "named": true,
+              "value": "text_fragment"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "text_start"
+                  },
+                  "named": true,
+                  "value": "text_fragment"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "string"
+                }
+              ]
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "text_fragment"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "string"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
     },
     "_ws": {
       "type": "PATTERN",
       "value": "[ \\t]+"
-    },
-    "_line_blank": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_line_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_line_end"
-        }
-      ]
     }
   },
   "extras": [
     {
       "type": "PATTERN",
       "value": "[\\r]"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comment"
     }
   ],
   "conflicts": [],
   "precedences": [],
   "externals": [
-    {
-      "type": "SYMBOL",
-      "name": "_line_start"
-    },
     {
       "type": "SYMBOL",
       "name": "_line_end"
@@ -352,6 +392,26 @@
     {
       "type": "SYMBOL",
       "name": "_dedent"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "identifier"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "text_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "text_fragment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "string"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comment"
     },
     {
       "type": "SYMBOL",

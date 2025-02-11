@@ -10,14 +10,18 @@ Base1: Object1
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
 		body: (body
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
 			)
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
 			)
 		)
 	)
@@ -36,19 +40,25 @@ Base2: Object2
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
 		body: (body
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
 				body: (body
 					(section
-						name: (text)
+						name: (text
+							(text_fragment)
+						)
 					)
 				)
 			)
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
 			)
 		)
 	)
@@ -69,27 +79,37 @@ Base2: Object2
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
 		body: (body
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
 				body: (body
 					(section
-						name: (text)
+						name: (text
+							(text_fragment)
+						)
 						body: (body
 							(section
-								name: (text)
+								name: (text
+									(text_fragment)
+								)
 							)
 						)
 					)
 					(section
-						name: (text)
+						name: (text
+							(text_fragment)
+						)
 					)
 				)
 			)
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
 			)
 		)
 	)
@@ -109,20 +129,28 @@ Base3: Object3
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
 		body: (body
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
 				body: (body
 					(section
-						name: (text)
+						name: (text
+							(text_fragment)
+						)
 						body: (body
 							(section
-								name: (text)
+								name: (text
+									(text_fragment)
+								)
 								body: (body
 									(section
-										name: (text)
+										name: (text
+											(text_fragment)
+										)
 									)
 								)
 							)
@@ -143,27 +171,34 @@ Base3: Object3
 		section2
 			section3
 				section4
-
 	section5
 
 ---
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
 		body: (body
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
 				body: (body
 					(section
-						name: (text)
+						name: (text
+							(text_fragment)
+						)
 						body: (body
 							(section
-								name: (text)
+								name: (text
+									(text_fragment)
+								)
 								body: (body
 									(section
-										name: (text)
+										name: (text
+											(text_fragment)
+										)
 									)
 								)
 							)
@@ -172,7 +207,55 @@ Base3: Object3
 				)
 			)
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
+			)
+		)
+	)
+)
+
+=========================
+Sections with empty lines
+=========================
+
+Base1: Object1
+	section1
+
+	section2
+
+		section3
+
+	section4
+
+---
+
+(source_file
+	(object
+		base: (identifier)
+		name: (identifier)
+		body: (body
+			(section
+				name: (text
+					(text_fragment)
+				)
+			)
+			(section
+				name: (text
+					(text_fragment)
+				)
+				body: (body
+					(section
+						name: (text
+							(text_fragment)
+						)
+					)
+				)
+			)
+			(section
+				name: (text
+					(text_fragment)
+				)
 			)
 		)
 	)

@@ -4,18 +4,30 @@ Comments on objects
 
 # comment1
 	# comment2
-Base1: Object1 # comment3
+Base1: Object1# comment3
 
 # comment4
+Base2: Object2 # comment3
 		# tabbed comment5
-  # spaced comment6
+	# tabbed comment6
 
 ---
 
 (source_file
+	(comment)
+	(comment)
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
+		(comment)
+		(comment)
+	)
+	(object
+		base: (identifier)
+		name: (identifier)
+		(comment)
+		(comment)
+		(comment)
 	)
 )
 
@@ -37,14 +49,26 @@ Base1: Object1
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
+		(comment)
+		(comment)
 		body: (body
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
+				(comment)
+				(comment)
+				(comment)
 			)
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
+				(comment)
+				(comment)
+				(comment)
 			)
 		)
 	)
@@ -68,24 +92,36 @@ Base1: Object1
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
+		(comment)
+		(comment)
 		body: (body
 			(struct_row
-				key: (text)
-				value: (text)
+				key: (identifier)
+				value: (text
+					(text_fragment)
+				)
+				(comment)
+				(comment)
+				(comment)
 			)
 			(struct_row
-				key: (text)
-				value: (text)
+				key: (identifier)
+				value: (text
+					(text_fragment)
+				)
+				(comment)
+				(comment)
+				(comment)
 			)
 		)
 	)
 )
 
-===================
+==================
 Comments on tables
-===================
+==================
 
 Base1: Object1
 	# comment1
@@ -101,15 +137,29 @@ Base1: Object1
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
+		(comment)
+		(comment)
 		body: (body
 			(table_row
-				(text)
+				(text
+					(text_fragment)
+				)
+				(comment)
+				(comment)
+				(comment)
 			)
 			(table_row
-				(text)
-				(text)
+				(text
+					(text_fragment)
+				)
+				(text
+					(text_fragment)
+				)
+				(comment)
+				(comment)
+				(comment)
 			)
 		)
 	)
@@ -126,11 +176,14 @@ Base1: Object1
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
 		body: (body
 			(section
-				name: (text)
+				name: (text
+					(text_fragment)
+				)
+				(comment)
 			)
 		)
 	)
@@ -141,17 +194,27 @@ Comments will cut off tables
 ============================
 
 Base1: Object1
+	| field1 |# comment3 |
 	| field1 | # comment3 |
 
 ---
 
 (source_file
 	(object
-		base: (text)
-		name: (text)
+		base: (identifier)
+		name: (identifier)
 		body: (body
 			(table_row
-				(text)
+				(text
+					(text_fragment)
+				)
+				(comment)
+			)
+			(table_row
+				(text
+					(text_fragment)
+				)
+				(comment)
 			)
 		)
 	)
