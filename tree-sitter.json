@@ -11,9 +11,9 @@
     }
   ],
   "metadata": {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "license": "MIT",
-    "description": "Grammar parser for Game Modeling Language (GML)",
+    "description": "Game Modeling Language (GML) grammar for tree-sitter",
     "authors": [
       {
         "name": "Approxit"

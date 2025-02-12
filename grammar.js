@@ -1,5 +1,5 @@
 /**
- * @file Grammar parser for Game Modeling Language (GML)
+ * @file Game Modeling Language (GML) grammar for tree-sitter
  * @author Approxit
  * @license MIT
  */

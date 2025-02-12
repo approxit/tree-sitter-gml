@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-gml
-        VERSION "0.1.0"
-        DESCRIPTION "Grammar parser for Game Modeling Language (GML)"
+        VERSION "0.1.1"
+        DESCRIPTION "Game Modeling Language (GML) grammar for tree-sitter"
         HOMEPAGE_URL "https://github.com/tree-sitter/tree-sitter-gml"
         LANGUAGES C)
 

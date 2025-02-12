@@ -1,4 +1,4 @@
-"""Grammar parser for Game Modeling Language (GML)"""
+"""Game Modeling Language (GML) grammar for tree-sitter"""
 
 from importlib.resources import files as _files
 
